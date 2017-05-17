@@ -187,6 +187,8 @@ RCT_EXPORT_METHOD(setAccessToken:(nonnull NSString *)accessToken)
     for (MGLOfflinePack * pack in packs) {
         [pack resume];
     }
+
+    [_bridge.eventDispatcher sendAppEventWithName:@"MapboxOfflineInitComplete"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
