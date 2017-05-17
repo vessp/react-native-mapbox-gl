@@ -197,7 +197,7 @@ RCT_EXPORT_METHOD(setAccessToken:(nonnull NSString *)accessToken)
         }
     }
 
-    [_bridge.eventDispatcher sendAppEventWithName:@"MapboxOfflineInitComplete"];
+    [_bridge.eventDispatcher sendAppEventWithName:@"MapboxOfflineInitComplete" body:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -392,7 +392,7 @@ RCT_REMAP_METHOD(addOfflinePack,
             NSLog(@"No object set for key @\"metadata\"");
             continue;
         }
-                            
+
         [callbackArray addObject:@{ @"name": userInfo[@"name"],
                                     @"metadata": userInfo[@"metadata"],
                                     @"countOfBytesCompleted": @(pack.progress.countOfBytesCompleted),
