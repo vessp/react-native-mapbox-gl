@@ -197,6 +197,7 @@ RCT_EXPORT_METHOD(setAccessToken:(nonnull NSString *)accessToken)
         }
     }
 
+    NSLog(@"MapboxOfflineInitComplete");
     [_bridge.eventDispatcher sendAppEventWithName:@"MapboxOfflineInitComplete" body:NULL];
 }
 
