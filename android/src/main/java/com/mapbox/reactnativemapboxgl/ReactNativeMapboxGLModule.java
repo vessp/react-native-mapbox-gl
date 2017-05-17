@@ -285,6 +285,8 @@ public class ReactNativeMapboxGLModule extends ReactContextBaseJavaModule {
                         uninitializedObserverCount--;
                         if (uninitializedObserverCount == 0) {
                             flushListingRequests();
+                            module.getReactApplicationContext().getJSModule(RCTNativeAppEventEmitter.class)
+                .emit("MapboxOfflineInitComplete", null);
                         }
                     }
                     @Override
