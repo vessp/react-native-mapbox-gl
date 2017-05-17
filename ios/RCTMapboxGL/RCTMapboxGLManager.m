@@ -228,6 +228,15 @@ RCT_EXPORT_METHOD(setAccessToken:(nonnull NSString *)accessToken)
 - (void)firePackProgress:(MGLOfflinePack*)pack {
     NSDictionary *userInfo = [NSKeyedUnarchiver unarchiveObjectWithData:pack.context];
     MGLOfflinePackProgress progress = pack.progress;
+
+    //#DWR# added, check and skip incomplete packs
+    if ([userInfo objectForKey:@"metadata"]) {
+        NSLog(@"There's an object set for key @\"metadata\"!");
+    }
+    else {
+        NSLog(@"No object set for key @\"metadata\"");
+        return;
+    }
     
     NSDictionary *event = @{ @"name": userInfo[@"name"],
                              @"metadata": userInfo[@"metadata"],
@@ -374,6 +383,16 @@ RCT_REMAP_METHOD(addOfflinePack,
     
     for (MGLOfflinePack *pack in packs) {
         NSMutableDictionary *userInfo = [NSKeyedUnarchiver unarchiveObjectWithData:pack.context];
+
+        //#DWR# added, check and skip incomplete packs
+        if ([userInfo objectForKey:@"metadata"]) {
+            NSLog(@"There's an object set for key @\"metadata\"!");
+        }
+        else {
+            NSLog(@"No object set for key @\"metadata\"");
+            continue;
+        }
+                            
         [callbackArray addObject:@{ @"name": userInfo[@"name"],
                                     @"metadata": userInfo[@"metadata"],
                                     @"countOfBytesCompleted": @(pack.progress.countOfBytesCompleted),
