@@ -188,6 +188,15 @@ RCT_EXPORT_METHOD(setAccessToken:(nonnull NSString *)accessToken)
         [pack resume];
     }
 
+    //#DWR# ADDED
+    for (MGLOfflinePack * pack in packs) {
+        NSDictionary *userInfo = [NSKeyedUnarchiver unarchiveObjectWithData:pack.context];
+        //NSLog(@"  ====> pack %@, state=%d", userInfo[@"name"], pack.state); //remember, state may be outdated, need to call requestProgress
+        if(pack.state != MGLOfflinePackStateComplete) { //#dwr# added this condition, maybe i wont need it in future ios-sdk releases of mapbox
+            [pack resume]; //https://www.mapbox.com/ios-sdk/api/3.3.1/Classes/MGLOfflinePack.html#/c:objc(cs)MGLOfflinePack(im)resume
+        }
+    }
+
     [_bridge.eventDispatcher sendAppEventWithName:@"MapboxOfflineInitComplete"];
 }
 
