@@ -333,10 +333,12 @@ public class ReactNativeMapboxGLModule extends ReactContextBaseJavaModule {
             e.printStackTrace();
         }
 
-        result.putInt("countOfBytesCompleted", (int)status.getCompletedResourceSize());
-        result.putInt("countOfResourcesCompleted", (int)status.getCompletedResourceCount());
-        result.putInt("countOfResourcesExpected", (int)status.getRequiredResourceCount());
-        result.putInt("maximumResourcesExpected", (int)status.getRequiredResourceCount());
+        if(status != null) {
+            result.putInt("countOfBytesCompleted", (int)status.getCompletedResourceSize());
+            result.putInt("countOfResourcesCompleted", (int)status.getCompletedResourceCount());
+            result.putInt("countOfResourcesExpected", (int)status.getRequiredResourceCount());
+            result.putInt("maximumResourcesExpected", (int)status.getRequiredResourceCount());
+        }
 
         return result;
     }
