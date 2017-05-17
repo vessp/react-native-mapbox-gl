@@ -184,9 +184,9 @@ RCT_EXPORT_METHOD(setAccessToken:(nonnull NSString *)accessToken)
         [_packRequests removeAllObjects];
     }
     
-    for (MGLOfflinePack * pack in packs) {
-        [pack resume];
-    }
+    //for (MGLOfflinePack * pack in packs) {
+    //    [pack resume];
+    //}
 
     //#DWR# ADDED
     for (MGLOfflinePack * pack in packs) {
